@@ -33,10 +33,10 @@ const ticketRoutes = require("./routes/tickets");
 const summaryRoutes = require("./routes/summary")
 
 // Use routes
-app.use("/api/users", userRoutes);
-app.use("/api/devices", deviceRoutes);
-app.use("/api/tickets", ticketRoutes);
-app.use("/api/summary", summaryRoutes);
+app.use("/users", userRoutes);
+app.use("/devices", deviceRoutes);
+app.use("/tickets", ticketRoutes);
+app.use("/summary", summaryRoutes);
 
 // Swagger setup
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
