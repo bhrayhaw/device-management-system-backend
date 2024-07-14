@@ -13,9 +13,10 @@ const app = express();
 connectDB();
 
 // Define your CORS options
+const allowedOrigins = process.env.FRONTEND_URL.split(",");
+
 const corsOptions = {
   origin: function (origin, callback) {
-    const allowedOrigins = process.env.FRONTEND_URL.split(",");
     if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
@@ -26,12 +27,18 @@ const corsOptions = {
   credentials: true,
   optionsSuccessStatus: 204,
 };
-
 // Use CORS middleware
 app.use(cors(corsOptions));
 
 // Middleware to parse JSON requests
 app.use(express.json());
+
+// Middleware to log headers
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", process.env.FRONTEND_URL);
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 
 // Import routes
 const userRoutes = require("./routes/users");
