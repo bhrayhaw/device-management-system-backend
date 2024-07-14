@@ -34,5 +34,5 @@ exports.loginUser = async (req, res) => {
 };
 
 exports.roles = async (req, res) => {
-  res.json(["Staff", "IT Personnel"]);
+  res.status(200).json(["Staff", "IT Personnel"]);
 };
